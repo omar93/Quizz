@@ -6,4 +6,9 @@ start.addEventListener('click', function () {
   welcomeWindow.classList.add('hide')
   gameWindow.classList.remove('hide')
   document.querySelector('#question').textContent = 'Q1' // add the first question from server
+  timeStart()
 })
+
+function timeStart () {
+
+}
