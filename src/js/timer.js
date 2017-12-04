@@ -1,11 +1,19 @@
 let timer = document.querySelector('#timer')
-timer.textContent = 20
+timer.textContent = 2
 let counter = 0
-let timeLeft = 20
+let timeLeft = 2
 
-function timeIt () {
-  counter++
-  timer.innerHTML = timeLeft - counter
+function StartTimer () {
+  let intervalId = setInterval(() => {
+    if (counter === timeLeft - 1) {
+      console.log('TIMEOUT!')
+      clearInterval(intervalId)
+    }
+    counter++
+    timer.innerHTML = timeLeft - counter
+  }, 1000)
 }
 
-setInterval(timeIt, 1000)
+module.exports = {
+  StartTimer
+}

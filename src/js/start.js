@@ -1,4 +1,5 @@
 const Import = require('./questions')
+const Time = require('./timer')
 let start = document.querySelector('#start')
 let gameWindow = document.querySelector('#quizz')
 let welcomeWindow = document.querySelector('#welcome')
@@ -8,6 +9,7 @@ start.addEventListener('click', async () => {
   const res = await window.fetch(`http://vhost3.lnu.se:20080/question/1`)
   const json = await res.json()
   _startGame(json)
+  Time.StartTimer() //  starts timer
 }, true)
 
 // function that does the remodeling, hides the welcome screen, calls setcontent
