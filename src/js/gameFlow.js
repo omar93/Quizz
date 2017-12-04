@@ -1,5 +1,6 @@
 const Import = require('./questions')
 const Start = require('./start')
+const Time = require('./timer')
 let ans = '2'
 let mirror = 0
 let jsonUrl = 'http://vhost3.lnu.se:20080/question/1'    // 'http://vhost3.lnu.se:20080/question/1'
@@ -52,6 +53,7 @@ async function _getQuestion (url) {
   // innan det ska vi uppdatera hur spelplanen ser ut med sida2.q samt sida2.alt1-4
   // console.log(json.message)
   _content(json)
+  Time.StartTimer()
 }
 
 // beroende på villen fråga vi har så målas den upp på skärmen
