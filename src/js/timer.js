@@ -1,21 +1,23 @@
 let timer = document.querySelector('#timer')
+let intervalId
 
 function StartTimer () {
-  timer.textContent = 3
+  // for each time we call it, it 'resets itself' and the values
+  clearInterval(intervalId)
   let counter = 0
   let timeLeft = 3
-  let intervalId = setInterval(() => {
+  timer.textContent = 3
+
+  intervalId = setInterval(() => {
     if (counter === timeLeft - 1) {
-      console.log('TIMEOUT!')
-      stopWatch(intervalId)
+      clearInterval(intervalId)
     }
     counter++
     timer.innerHTML = timeLeft - counter
+    if (counter === timeLeft) {
+      console.log('TIMEOUT!')
+    }
   }, 1000)
-}
-
-function stopWatch (intervalId) {
-  clearInterval(intervalId)
 }
 
 module.exports = {
