@@ -55,7 +55,7 @@ function _content (json) {
 }
 
 function _setContent (json, a1, a2, a3, a4) {
-  console.log(json)
+  // console.log(json)
   quest.textContent = json.question
   b1.textContent = a1
   b2.textContent = a2

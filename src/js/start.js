@@ -16,3 +16,7 @@ function _startGame (json) {
   welcomeWindow.classList.add('hide')
   gameWindow.classList.remove('hide')
 }
+
+module.exports = {
+  _startGame
+}
