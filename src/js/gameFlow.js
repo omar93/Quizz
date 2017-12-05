@@ -1,6 +1,7 @@
 const Import = require('./questions')
 const Start = require('./start')
 const Time = require('./timer')
+
 let ans = '2'
 let mirror = 0
 let jsonUrl = 'http://vhost3.lnu.se:20080/question/1'    // 'http://vhost3.lnu.se:20080/question/1'
@@ -10,7 +11,9 @@ let jsonUrl = 'http://vhost3.lnu.se:20080/question/1'    // 'http://vhost3.lnu.s
 for (let i = 0; i < 4; i++) {
   document.querySelector('#ans').children[i].addEventListener('click', async () => {
     const res = await window.fetch(jsonUrl)
+
     const json = await res.json()
+
     // SKICKA VIDARE NEXTURL ELLER HELA JSON O SEN EXTRACTA JSON.NEXTURL i _postAns
     _postAns((json))
   })
@@ -18,28 +21,28 @@ for (let i = 0; i < 4; i++) {
 
 //  answer
 async function _postAns (jsonUrl) {
-  if (jsonUrl.id === 326) {
-    /*
-    let url = 'http://vhost3.lnu.se:20080/question/1'
-    const restart = await window.fetch(url)
-    let json = await restart.json()
-    Start._startGame(json)
-    json.id = 1 */
-    Start._restartGame()
-  } else {
-    let res = await window.fetch(`${jsonUrl.nextURL}`, {  // här tar vi ut "mextURL" för den ska vi svara på och det sköts i denna funcktion
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'answer': ans
-      })
+  let res = await window.fetch(`${jsonUrl.nextURL}`, {  // här tar vi ut "mextURL" för den ska vi svara på och det sköts i denna funcktion
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'answer': ans
     })
+  })
+  if (jsonUrl.id === 326) {
+    console.log(jsonUrl)
+    let restartedUrl = 'http://vhost3.lnu.se:20080/question/1'
+    Start._restartGame()
+    let res = await window.fetch(`${restartedUrl}`)
     const json = await res.json()
-  // console.log(json.message)
+    console.log(json)
+    setUrl(json)
+    setData(ans)
+    Start._restartGame(json)
+  } else {
+    const json = await res.json()
     _getQuestion(json)    // när vi skickar svar får vi en url som vi skickar till getQ
-    if (jsonUrl.id === 326) { console.log('last one!') }
     setUrl(json)
     setData(ans)
   }

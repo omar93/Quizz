@@ -5,8 +5,8 @@ function StartTimer () {
   // for each time we call it, it 'resets itself' and the values
   clearInterval(intervalId)
   let counter = 0
-  let timeLeft = 70
-  timer.textContent = timeLeft
+  let timeLeft = 25
+  timer.textContent = '0:' + timeLeft
   intervalId = setInterval(() => {
     counter++
     timer.innerHTML = '0:' + (timeLeft - counter)
@@ -19,9 +19,8 @@ function StartTimer () {
 }
 
 function gameOver () {
-  window.alert('game Over!')
-  /* document.querySelector('#quizz').classList.add('hide')
-  document.querySelector('#welcome').classList.remove('hide') */
+  document.querySelector('#quizz').classList.add('hide')
+  document.querySelector('#welcome').classList.remove('hide')
 }
 
 module.exports = {
