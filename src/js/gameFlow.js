@@ -19,11 +19,13 @@ for (let i = 0; i < 4; i++) {
 //  answer
 async function _postAns (jsonUrl) {
   if (jsonUrl.id === 326) {
+    /*
     let url = 'http://vhost3.lnu.se:20080/question/1'
     const restart = await window.fetch(url)
     let json = await restart.json()
     Start._startGame(json)
-    json.id = 1
+    json.id = 1 */
+    Start._restartGame()
   } else {
     let res = await window.fetch(`${jsonUrl.nextURL}`, {  // här tar vi ut "mextURL" för den ska vi svara på och det sköts i denna funcktion
       method: 'POST',

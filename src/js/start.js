@@ -14,11 +14,21 @@ start.addEventListener('click', async () => {
 
 // function that does the remodeling, hides the welcome screen, calls setcontent
 function _startGame (json) {
+  console.log(json)
   if (json.id === 1) { Import.q1(json) }
   welcomeWindow.classList.add('hide')
   gameWindow.classList.remove('hide')
 }
 
+async function _restartGame () {
+  welcomeWindow.classList.remove('hide')
+  gameWindow.classList.add('hide')
+  let json = await window.fetch(`http://vhost3.lnu.se:20080/question/1`)
+  json = await json.json()
+  _startGame(json)
+}
+
 module.exports = {
-  _startGame
+  _startGame,
+  _restartGame
 }
