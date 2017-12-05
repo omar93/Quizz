@@ -11,7 +11,6 @@ let jsonUrl = 'http://vhost3.lnu.se:20080/question/1'    // 'http://vhost3.lnu.s
 for (let i = 0; i < 4; i++) {
   document.querySelector('#ans').children[i].addEventListener('click', async () => {
     const res = await window.fetch(jsonUrl)
-
     const json = await res.json()
 
     // SKICKA VIDARE NEXTURL ELLER HELA JSON O SEN EXTRACTA JSON.NEXTURL i _postAns
@@ -21,33 +20,41 @@ for (let i = 0; i < 4; i++) {
 
 //  answer
 async function _postAns (jsonUrl) {
-  let res = await window.fetch(`${jsonUrl.nextURL}`, {  // här tar vi ut "mextURL" för den ska vi svara på och det sköts i denna funcktion
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      'answer': ans
+  if (jsonUrl.nextURL === 'http://vhost3.lnu.se:20080/answer/326' && jsonUrl.id === 326) {
+    let res = await window.fetch(`${jsonUrl.nextURL}`, {  // här tar vi ut "mextURL" för den ska vi svara på och det sköts i denna funcktion
+      method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'answer': ans})
     })
-  })
-  if (jsonUrl.id === 326) {
-    console.log(jsonUrl)
+    const json = await res.json()
+    _gameOver(json)
+  } else {
+    let res = await window.fetch(`${jsonUrl.nextURL}`, {  // här tar vi ut "mextURL" för den ska vi svara på och det sköts i denna funcktion
+      method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'answer': ans})
+    })
+    const json = await res.json()
+    /*
+    console.log('nu kmr sista: ')
     let restartedUrl = 'http://vhost3.lnu.se:20080/question/1'
     Start._restartGame()
     let res = await window.fetch(`${restartedUrl}`)
     const json = await res.json()
+    */
+  // console.log('_____________')
+  // console.log(json)
+  // console.log('||||||||||||||||||||||||||')
+  // console.log(jsonUrl)
+  // console.log('-------------')
+    // Start._restartGame(json)
+
     console.log(json)
-    setUrl(json)
-    setData(ans)
-    Start._restartGame(json)
-  } else {
-    const json = await res.json()
     _getQuestion(json)    // när vi skickar svar får vi en url som vi skickar till getQ
     setUrl(json)
     setData(ans)
   }
 }
-
+async function _gameOver (json) {
+  console.log(json)
+  console.log('spelet va nu slut, bra jobbat!')
+}
 // Rest of the questions, need to send in url for "next" question
 async function _getQuestion (url) {
   // vi får en url med "rätt svar" och sedan länk till sida2 med dess fråga o alternativ
@@ -69,7 +76,9 @@ function _content (json) {
   if (json.id === 6) { Import.q4(json) }
   if (json.id === 32) { Import.q5(json) }
   if (json.id === 32456) { Import.q6(json) }
-  if (json.id === 326) { Import.q7(json) }
+  if (json.id === 326) {
+    Import.q7(json)
+  }
 }
 
 function setUrl (json) {

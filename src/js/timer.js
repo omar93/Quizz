@@ -5,7 +5,7 @@ function StartTimer () {
   // for each time we call it, it 'resets itself' and the values
   clearInterval(intervalId)
   let counter = 0
-  let timeLeft = 25
+  let timeLeft = 30
   timer.textContent = '0:' + timeLeft
   intervalId = setInterval(() => {
     counter++
