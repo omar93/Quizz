@@ -21,12 +21,6 @@ function _startGame (json) {
   console.log(json.question)
 }
 
-async function _restartGame (json) {
-  welcomeWindow.classList.remove('hide')
-  gameWindow.classList.add('hide')
-}
-
 module.exports = {
-  _startGame,
-  _restartGame
+  _startGame
 }

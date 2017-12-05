@@ -1,6 +1,8 @@
 const Import = require('./questions')
-const Start = require('./start')
 const Time = require('./timer')
+
+let gameWindow = document.querySelector('#quizz')
+let welcomeWindow = document.querySelector('#welcome')
 
 let ans = '2'
 let mirror = 0
@@ -12,7 +14,6 @@ for (let i = 0; i < 4; i++) {
   document.querySelector('#ans').children[i].addEventListener('click', async () => {
     const res = await window.fetch(jsonUrl)
     const json = await res.json()
-
     // SKICKA VIDARE NEXTURL ELLER HELA JSON O SEN EXTRACTA JSON.NEXTURL i _postAns
     _postAns((json))
   })
@@ -21,30 +22,20 @@ for (let i = 0; i < 4; i++) {
 //  answer
 async function _postAns (jsonUrl) {
   if (jsonUrl.nextURL === 'http://vhost3.lnu.se:20080/answer/326' && jsonUrl.id === 326) {
+    ans = 'alt3'
     let res = await window.fetch(`${jsonUrl.nextURL}`, {  // här tar vi ut "mextURL" för den ska vi svara på och det sköts i denna funcktion
       method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'answer': ans})
     })
     const json = await res.json()
+    console.log('vad svarade vi på sista?')
+    console.log(ans)
     _gameOver(json)
+    setData(ans)
   } else {
     let res = await window.fetch(`${jsonUrl.nextURL}`, {  // här tar vi ut "mextURL" för den ska vi svara på och det sköts i denna funcktion
       method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'answer': ans})
     })
     const json = await res.json()
-    /*
-    console.log('nu kmr sista: ')
-    let restartedUrl = 'http://vhost3.lnu.se:20080/question/1'
-    Start._restartGame()
-    let res = await window.fetch(`${restartedUrl}`)
-    const json = await res.json()
-    */
-  // console.log('_____________')
-  // console.log(json)
-  // console.log('||||||||||||||||||||||||||')
-  // console.log(jsonUrl)
-  // console.log('-------------')
-    // Start._restartGame(json)
-
     console.log(json)
     _getQuestion(json)    // när vi skickar svar får vi en url som vi skickar till getQ
     setUrl(json)
@@ -54,6 +45,13 @@ async function _postAns (jsonUrl) {
 async function _gameOver (json) {
   console.log(json)
   console.log('spelet va nu slut, bra jobbat!')
+  _restartGame(json)
+}
+
+async function _restartGame (json) {
+  welcomeWindow.classList.remove('hide')
+  gameWindow.classList.add('hide')
+  jsonUrl = 'http://vhost3.lnu.se:20080/question/1'
 }
 // Rest of the questions, need to send in url for "next" question
 async function _getQuestion (url) {
@@ -93,9 +91,8 @@ function setData (json) {
   if (json === 'alt3') { ans = '1995' }
   if (json === '1995') { ans = 'alt2' }
   if (json === 'alt2') { ans = 'V8' }
-  if (json === 'V8') {
-    ans = 'alt3'
-    mirror++
-  }
-  if (json === 'alt3' && mirror === 1) { ans = 'alt3' }
+  if (json === 'V8') { ans = 'alt3'; mirror++ }
+  if (json === 'alt3' && mirror === 1) { ans = 'alt3'; mirror++ }
+  // resets the answer loop
+  if (json === 'alt3' && mirror === 2) { ans = '2'; mirror = 0 }
 }
