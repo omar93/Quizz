@@ -8,7 +8,6 @@ let urlObject = 'http://vhost3.lnu.se:20080/question/1'
 let batman = 'NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!'
 
 let restartBtn = document.querySelector('#restart')
-let menuBtn = document.querySelector('#menu')
 
 // create 4 eventlisteners for all 4 buttons
 for (let i = 0; i < 4; i++) {
