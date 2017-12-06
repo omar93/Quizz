@@ -1,15 +1,47 @@
+let startBtn = document.querySelector('#start')
+let restartBtn = document.querySelector('#restart')
+let hBtn = document.querySelector('#score')
+
+// let playername = localStorage.getItem('player')
+
+let gameWindow = document.querySelector('#quizz')
+let welcomeWindow = document.querySelector('#welcome')
+let scoreWindow = document.querySelector('#scoreW')
+
+// let name = document.querySelector('#playername')
+
 let b1 = document.querySelector('#b1')
 let b2 = document.querySelector('#b2')
 let b3 = document.querySelector('#b3')
 let b4 = document.querySelector('#b4')
-let quest = document.querySelector('#question')
+let question = document.querySelector('#question')
+
+function welcome () {
+  gameWindow.classList.add('hide')
+  welcomeWindow.classList.remove('hide')
+}
+
+function game () {
+  gameWindow.classList.remove('hide')
+  welcomeWindow.classList.add('hide')
+}
+
+function result () {
+  hBtn.classList.add('hide')
+  startBtn.classList.add('hide')
+  restartBtn.classList.remove()
+  gameWindow.classList.add('hide')
+  welcomeWindow.classList.add('hide')
+  scoreWindow.classList.remove('hide')
+  // name.textContent = playername
+}
 
 function q1 (json) {
   b1.textContent = '2'
   b2.textContent = '42'
   b3.textContent = '33'
   b4.textContent = 'apa'
-  quest.textContent = json.question
+  question.textContent = json.question
 }
 
 function q2 (json) {
@@ -21,7 +53,7 @@ function q3 (json) {
   b2.textContent = '1996'
   b3.textContent = '1990'
   b4.textContent = '2003'
-  quest.textContent = json.question
+  question.textContent = json.question
 }
 
 function q4 (json) {
@@ -34,7 +66,7 @@ function q5 (json) {
   b2.textContent = 'apa'
   b3.textContent = 'fisk'
   b4.textContent = 'datorn'
-  quest.textContent = json.question
+  question.textContent = json.question
 }
 
 function q6 (json) {
@@ -56,7 +88,7 @@ function _content (json) {
 
 function _setContent (json, a1, a2, a3, a4) {
   // console.log(json)
-  quest.textContent = json.question
+  question.textContent = json.question
   b1.textContent = a1
   b2.textContent = a2
   b3.textContent = a3
@@ -70,5 +102,8 @@ module.exports = {
   q4,
   q5,
   q6,
-  q7
+  q7,
+  game,
+  welcome,
+  result
 }

@@ -16,6 +16,12 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+#scoreW {
+    margin: 0 auto;
+    text-align: center;
+    width: 250px;
+}
+
 #start {
     background-color: #A0A0A0;
     padding: 10px;
@@ -36,11 +42,15 @@ body {
 }
 
 #question {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
     display: block;
     margin: 0 auto;
     margin-top: 7%;
     width: 80%;
-    border-radius: 15px;
+    border-radius: 0px;
+    background-color: white;
 }
 
 #timer {
