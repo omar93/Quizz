@@ -63,9 +63,9 @@ function q4 (json) {
 
 function q5 (json) {
   b1.textContent = 'V8'
-  b2.textContent = 'apa'
-  b3.textContent = 'fisk'
-  b4.textContent = 'datorn'
+  b2.textContent = 'mp5'
+  b3.textContent = 'Rs6'
+  b4.textContent = 'Nodulus'
   question.textContent = json.question
 }
 
@@ -75,6 +75,15 @@ function q6 (json) {
 
 function q7 (json) {
   _content(json)
+}
+
+function autoQuestion (json) {
+  _content(json)
+}
+
+function semiAutoQuestion (json) {
+  _content(json)
+  b4.textContent = '%correct.answer%'
 }
 
 function _content (json) {
@@ -105,5 +114,7 @@ module.exports = {
   q7,
   game,
   welcome,
-  result
+  result,
+  autoQuestion,
+  semiAutoQuestion
 }
