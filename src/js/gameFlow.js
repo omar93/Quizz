@@ -50,13 +50,13 @@ restartBtn.addEventListener('click', async () => {
 async function _winGame () {
   Timer.stopTimer()
   Draw.result()
-  console.log('You won!')
+  window.alert('Good job, you won!')
 }
 
 function _gameOver () {
   Timer.stopTimer()
   Draw.result()
-  console.log('Wrong answer, you lost')
+  window.alert('Wrong answer, you lost')
 }
 
 function _refreshWindow (objectUrl) {

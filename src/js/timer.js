@@ -16,16 +16,16 @@ function StartTimer () {
     if (counter === timeLeft) {
       timer.innerHTML = '0'
       clearInterval(intervalId)
-      timeOut()
+      timeOut(intervalId)
     }
   }, 1000)
 }
 
-function timeOut () {
+function timeOut (id) {
   document.querySelector('#quizz').classList.add('hide')
   document.querySelector('#welcome').classList.add('hide')
   document.querySelector('#scoreW').classList.remove('hide')
-  console.log('Times up, you lost')
+  window.alert('Times up, you lost')
 }
 
 function playerTime () {
