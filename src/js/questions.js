@@ -1,7 +1,3 @@
-let startBtn = document.querySelector('#start')
-let restartBtn = document.querySelector('#restart')
-let hBtn = document.querySelector('#score')
-
 // let playername = localStorage.getItem('player')
 
 let gameWindow = document.querySelector('#quizz')
@@ -19,21 +15,19 @@ let question = document.querySelector('#question')
 function welcome () {
   gameWindow.classList.add('hide')
   welcomeWindow.classList.remove('hide')
+  scoreWindow.classList.add('hide')
 }
 
 function game () {
   gameWindow.classList.remove('hide')
   welcomeWindow.classList.add('hide')
+  scoreWindow.classList.add('hide')
 }
 
 function result () {
-  hBtn.classList.add('hide')
-  startBtn.classList.add('hide')
-  restartBtn.classList.remove()
   gameWindow.classList.add('hide')
   welcomeWindow.classList.add('hide')
   scoreWindow.classList.remove('hide')
-  // name.textContent = playername
 }
 
 function q1 (json) {

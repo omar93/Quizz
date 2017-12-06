@@ -1,9 +1,11 @@
 const Draw = require('./questions')
+const Timer = require('./timer')
 let answerBox = document.querySelector('#ans')
-// const Timer = require('./timer')
+
 let ans = ''
 let urlObject = 'http://vhost3.lnu.se:20080/question/1'
 let batman = 'NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!'
+let restartBtn = document.querySelector('#restart')
 
 // create 4 eventlisteners for all 4 buttons
 for (let i = 0; i < 4; i++) {
@@ -11,6 +13,7 @@ for (let i = 0; i < 4; i++) {
     urlObject = await window.fetch(urlObject)
     urlObject = await urlObject.json()
     ans = (event.target.textContent)
+    Timer.StartTimer()
     _filterAnswer(urlObject)
   })
 }
@@ -38,8 +41,15 @@ async function _continue (serverResponse) {
   _refreshWindow(objectUrl)
 }
 
-function _winGame () {
+async function _winGame () {
+  Draw.result()
+  restartBtn.addEventListener('click', async () => {
+    let urlObject = 'http://vhost3.lnu.se:20080/question/1'
+    _continue(urlObject)
+    Draw.welcome()
+  })
   console.log('You won!')
+  Timer.stopTimer()
 }
 
 function _gameOver () {
@@ -47,6 +57,7 @@ function _gameOver () {
 }
 
 function _refreshWindow (objectUrl) {
+  if (objectUrl.id === 1) { Draw.q1(objectUrl) }
   if (objectUrl.id === 21) { Draw.autoQuestion(objectUrl) }
   if (objectUrl.id === 321) { Draw.q3(objectUrl) }
   if (objectUrl.id === 6) { Draw.semiAutoQuestion(objectUrl) }
@@ -61,4 +72,8 @@ function _filterAnswer (urlObject) {
   if (urlObject.id === 32456 && ans === batman) { ans = 'alt3' }
   if (urlObject.id === 326 && ans === 'DOMherren') { ans = 'alt3' }
   _sendAnswer(urlObject)  //  Handles the current ulr in question
+}
+
+module.exports = {
+  _gameOver
 }

@@ -29,6 +29,14 @@ body {
 #start:hover {
     background-color: red;
 }
+
+#restart {
+    background-color: #A0A0A0;
+    padding: 10px;
+}
+#restart:hover {
+    background-color: red;
+}
 #quizz {
     background-color: #CCFFFF;
     width: 650px;

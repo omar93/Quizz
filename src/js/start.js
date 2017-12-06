@@ -5,7 +5,7 @@ let startBtn = document.querySelector('#start')
 let urlObject = 'http://vhost3.lnu.se:20080/question/1'
 
 startBtn.addEventListener('click', async (event) => {
-  event.preventDefault()      //  Stoppar "post/get av knappen"
+  event.preventDefault()      //  Stoppar "post/get" knappen"
   urlObject = await window.fetch(urlObject)
   urlObject = await urlObject.json()
   Draw.game()

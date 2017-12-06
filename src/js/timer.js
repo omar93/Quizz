@@ -6,7 +6,7 @@ function StartTimer () {
   // for each time we call it, it 'resets itself' and the values
   clearInterval(intervalId)
   let counter = 0
-  let timeLeft = 1000
+  let timeLeft = 10
   timer.textContent = '0:' + timeLeft
   intervalId = setInterval(() => {
     counter++
@@ -16,13 +16,12 @@ function StartTimer () {
     if (counter === timeLeft) {
       timer.innerHTML = '0'
       clearInterval(intervalId)
-      gameOver()
-      console.log(totalTime)
+      timeOut()
     }
   }, 1000)
 }
 
-function gameOver () {
+function timeOut () {
   document.querySelector('#quizz').classList.add('hide')
   document.querySelector('#welcome').classList.remove('hide')
 }
@@ -31,7 +30,14 @@ function playerTime () {
   totalTime++
 }
 
+function stopTimer () {
+  clearInterval(intervalId)
+  console.log(totalTime)
+
+ // window.localStorage.setItem(JSON.stringify(name), JSON.stringify(score))
+}
 module.exports = {
   StartTimer,
-  playerTime
+  playerTime,
+  stopTimer
 }
