@@ -21,20 +21,14 @@ body {
     text-align: center;
     width: 250px;
 }
-
-#start {
+#start, #restart, #menu, #score {
     background-color: #A0A0A0;
+}
+.shape {
+    
     padding: 10px;
 }
-#start:hover {
-    background-color: red;
-}
-
-#restart {
-    background-color: #A0A0A0;
-    padding: 10px;
-}
-#restart:hover {
+.shape:hover {
     background-color: red;
 }
 #quizz {
