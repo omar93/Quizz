@@ -6,7 +6,7 @@ function StartTimer () {
   // for each time we call it, it 'resets itself' and the values
   clearInterval(intervalId)
   let counter = 0
-  let timeLeft = 10
+  let timeLeft = 2
   timer.textContent = '0:' + timeLeft
   intervalId = setInterval(() => {
     counter++
@@ -23,7 +23,9 @@ function StartTimer () {
 
 function timeOut () {
   document.querySelector('#quizz').classList.add('hide')
-  document.querySelector('#welcome').classList.remove('hide')
+  document.querySelector('#welcome').classList.add('hide')
+  document.querySelector('#scoreW').classList.remove('hide')
+  console.log('Times up, you lost')
 }
 
 function playerTime () {

@@ -1,5 +1,6 @@
 const Draw = require('./questions')
 const Timer = require('./timer')
+const Start = require('./start')
 let answerBox = document.querySelector('#ans')
 
 let ans = ''
@@ -41,19 +42,21 @@ async function _continue (serverResponse) {
   _refreshWindow(objectUrl)
 }
 
+restartBtn.addEventListener('click', async () => {
+  urlObject = 'http://vhost3.lnu.se:20080/question/1'
+  Start.startGame(urlObject)
+})
+
 async function _winGame () {
-  Draw.result()
-  restartBtn.addEventListener('click', async () => {
-    let urlObject = 'http://vhost3.lnu.se:20080/question/1'
-    _continue(urlObject)
-    Draw.welcome()
-  })
-  console.log('You won!')
   Timer.stopTimer()
+  Draw.result()
+  console.log('You won!')
 }
 
 function _gameOver () {
-  console.log('GameOver')
+  Timer.stopTimer()
+  Draw.result()
+  console.log('Wrong answer, you lost')
 }
 
 function _refreshWindow (objectUrl) {
