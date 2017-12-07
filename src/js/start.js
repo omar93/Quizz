@@ -3,16 +3,20 @@ const Timer = require('./timer')
 
 let startBtn = document.querySelector('#start')
 let scoreBtn = document.querySelector('#score')
+let menuBtn = document.querySelector('#menu')
 
 let urlObject = 'http://vhost3.lnu.se:20080/question/1'
-
 startBtn.addEventListener('click', async (event) => {
-  event.preventDefault()      //  Stoppar "post/get" knappen"
+  event.preventDefault()
   startGame(urlObject)
 })
 
 scoreBtn.addEventListener('click', () => {
   Draw.result()
+})
+
+menuBtn.addEventListener('click', () => {
+  Draw.welcome()
 })
 
 async function startGame (urlObject) {

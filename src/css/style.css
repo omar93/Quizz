@@ -19,14 +19,14 @@ body {
 #scoreW {
     margin: 0 auto;
     text-align: center;
-    width: 250px;
+    width: 500px;
 }
 #start, #restart, #menu, #score {
     background-color: #A0A0A0;
 }
 .shape {
-    
     padding: 10px;
+    margin-bottom: 10px;
 }
 .shape:hover {
     background-color: red;
@@ -95,4 +95,12 @@ body {
 
 .btn:hover {
     background-color: red;
+}
+
+#scoreTable {
+    width: 100%;
+}
+
+ul li {
+    text-align: left;
 }

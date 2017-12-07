@@ -34,7 +34,7 @@ function playerTime () {
 
 function stopTimer () {
   clearInterval(intervalId)
-  console.log(totalTime)
+  return (totalTime)
 
  // window.localStorage.setItem(JSON.stringify(name), JSON.stringify(score))
 }

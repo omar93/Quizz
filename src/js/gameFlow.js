@@ -6,6 +6,8 @@ let answerBox = document.querySelector('#ans')
 let ans = ''
 let urlObject = 'http://vhost3.lnu.se:20080/question/1'
 let batman = 'NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!'
+let nameField = document.querySelector('#name')
+let name = ''
 
 let restartBtn = document.querySelector('#restart')
 
@@ -49,13 +51,33 @@ restartBtn.addEventListener('click', async () => {
 })
 
 async function _winGame () {
+  urlObject = 'http://vhost3.lnu.se:20080/question/1'
+  name = nameField.valuelet
   Timer.stopTimer()
+  let time = Timer.stopTimer()
+  setScore(time)
   Draw.result()
   window.alert('Good job, you won!')
 }
 
+function setScore (time) {
+  name = nameField.value
+  window.localStorage.setItem(name, time)
+
+  let thName = document.createElement('th')
+  thName.innerHTML = name
+
+  let thTime = document.createElement('th')
+  thTime.innerHTML = time
+
+  let tr = document.querySelector('#scoreTable')
+  tr.appendChild(thName)
+  tr.appendChild(thTime)
+}
+
 function _gameOver () {
   Timer.stopTimer()
+  urlObject = 'http://vhost3.lnu.se:20080/question/1'
   Draw.result()
   window.alert('Wrong answer, you lost')
 }

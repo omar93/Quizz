@@ -9,13 +9,15 @@
     </head>
     <body>
         <div id="welcome" class="corners">
-               <p>
-                    Welcome to this quizz, you will answear 7 questions, you have 20 seconds on each question and there
-                    are 4 options on each question, if you get a question wrong, you restart
+
+                <p>
+                    Welcome to this quizz, you will answear 7 questions<br>
+                    you have 20 seconds to answer each question<br>
+                    each question have 4 laternatives, only 1 is correct!
                 </p>
 
                 <form id="form" action="/action_page.php"><br>
-                    Name: <input type="text" id="name" name="wd"><br><br>
+                    Name: <input type="text" id="name" name="playerName"><br><br>
                     <button id="start" class="corners shape">Start</button>
                 </form>
                 
@@ -45,8 +47,23 @@
 
         <div id="scoreW" class="corners hide">
             <p>HIGHSCORE:</p>
-            <p>Name: <span id="playername"></span></p>
-            <button id="restart" class="corners shape">Restart</button>
+            <table id="scoreTable">
+                <tr>
+                    <th>Name: </th>
+                    <th>Time 1:</th>
+                    <th>Time 2:</th>
+                    <th>Time 3:</th>
+                    <th>Time 4:</th>
+                    <th>Time 5:</td>
+                </tr>
+
+                <tr>
+                </tr>
+
+            </table>
+            <!--<p>Name: <span id="playername"></span></p>--><br><br>
+            <button id="restart" class="corners shape">Start</button>
+            <button id="menu" class="corners shape">Main menu</button>
         </div>
         <script src="build.js"></script>
     </body>
