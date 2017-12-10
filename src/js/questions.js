@@ -34,13 +34,14 @@ function result () {
 function getScore () {
   let scoreObject = window.localStorage.getItem('player')
   scoreObject = JSON.parse(scoreObject)
-
+  let timeDB = scoreObject[1]
+  timeDB.sort(function (a, b) { return a - b })
   document.querySelector('#playerName').textContent = scoreObject[0]
-  document.querySelector('#t1').textContent = scoreObject[1][1]
-  document.querySelector('#t2').textContent = scoreObject[1][2]
-  document.querySelector('#t3').textContent = scoreObject[1][3]
-  document.querySelector('#t4').textContent = scoreObject[1][4]
-  document.querySelector('#t5').textContent = scoreObject[1][5]
+  document.querySelector('#t1').textContent = scoreObject[1][0]
+  document.querySelector('#t2').textContent = scoreObject[1][1]
+  document.querySelector('#t3').textContent = scoreObject[1][2]
+  document.querySelector('#t4').textContent = scoreObject[1][3]
+  document.querySelector('#t5').textContent = scoreObject[1][4]
 }
 
 function q1 (json) {

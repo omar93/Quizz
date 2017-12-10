@@ -21,7 +21,7 @@ function StartTimer () {
       timeOut(intervalId)
       counter = 0
     }
-  }, 200)
+  }, 500)
 }
 
 function timeOut (id) {

@@ -57,7 +57,7 @@ async function _winGame () {
   let time = Timer.stopTimer()
   setScore(time)
   Draw.result()
-  window.alert('Good job, you won!')
+  // window.alert('Good job, you won!')
 }
 
 function setScore (time) {
@@ -74,12 +74,23 @@ function setScore (time) {
     let storedScore = window.localStorage.getItem('player')
     storedScore = JSON.parse(storedScore)
     let timeDB = storedScore[1]
-    console.log(timeDB[2])
     if (name.length === 0) { name = storedScore[0] }
     storedScore[0] = name
-    if (storedScore[1].length < 6) {
+    if (storedScore[1].length < 5) {
       storedScore[0] = name
       timeDB.push(time)
+      window.localStorage.setItem('player', JSON.stringify(storedScore))
+    } else {
+      timeDB.sort(function (a, b) { return a - b })
+      for (let i = 0; i < timeDB.length - 1; i++) {
+        if (time < timeDB[i]) {
+          timeDB.pop()
+          timeDB.push(time)
+          timeDB.sort(function (a, b) { return a - b })
+          break
+        }
+      }
+      // här händer shit om de redan fionns 5 tider
       window.localStorage.setItem('player', JSON.stringify(storedScore))
     }
   }
