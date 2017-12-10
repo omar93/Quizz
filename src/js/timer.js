@@ -1,3 +1,4 @@
+const Draw = require('./questions')
 let timer = document.querySelector('#timer')
 let intervalId
 let totalTime = 0
@@ -21,7 +22,7 @@ function StartTimer () {
       timeOut(intervalId)
       counter = 0
     }
-  }, 500)
+  }, 1000)
 }
 
 function timeOut (id) {
@@ -29,6 +30,7 @@ function timeOut (id) {
   document.querySelector('#welcome').classList.add('hide')
   document.querySelector('#scoreW').classList.remove('hide')
   window.alert('Times up, you lost')
+  Draw.getScore()
 }
 
 function stopTimer () {

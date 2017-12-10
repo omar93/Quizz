@@ -57,24 +57,24 @@ async function _winGame () {
   let time = Timer.stopTimer()
   setScore(time)
   Draw.result()
-  // window.alert('Good job, you won!')
+  window.alert('Good job, you won!')
 }
 
 function setScore (time) {
-  console.log(time)
   name = nameField.value
   let timeDB = []
   timeDB.push(time)
-  // used if no data saved
   let scoreDB = [name, timeDB]
+
   if (window.localStorage.getItem('player') === null) {
     window.localStorage.setItem('player', JSON.stringify(scoreDB))
-    // end if no data saved
-  } else {  // om det redan finns spelare
+  } else {
     let storedScore = window.localStorage.getItem('player')
     storedScore = JSON.parse(storedScore)
     let timeDB = storedScore[1]
+
     if (name.length === 0) { name = storedScore[0] }
+
     storedScore[0] = name
     if (storedScore[1].length < 5) {
       storedScore[0] = name
@@ -82,6 +82,7 @@ function setScore (time) {
       window.localStorage.setItem('player', JSON.stringify(storedScore))
     } else {
       timeDB.sort(function (a, b) { return a - b })
+
       for (let i = 0; i < timeDB.length - 1; i++) {
         if (time < timeDB[i]) {
           timeDB.pop()
@@ -90,7 +91,6 @@ function setScore (time) {
           break
         }
       }
-      // här händer shit om de redan fionns 5 tider
       window.localStorage.setItem('player', JSON.stringify(storedScore))
     }
   }
@@ -119,7 +119,7 @@ function _filterAnswer (urlObject) {
   if (urlObject.id === 6 && ans === 'You console it!') { ans = 'alt2' }
   if (urlObject.id === 32456 && ans === batman) { ans = 'alt3' }
   if (urlObject.id === 326 && ans === 'DOMherren') { ans = 'alt3' }
-  _sendAnswer(urlObject)  //  Handles the current ulr in question
+  _sendAnswer(urlObject)
 }
 
 module.exports = {
