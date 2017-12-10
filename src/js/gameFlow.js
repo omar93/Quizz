@@ -61,18 +61,23 @@ async function _winGame () {
 }
 
 function setScore (time) {
+  console.log(time)
   name = nameField.value
-  window.localStorage.setItem(name, time)
-
-  let thName = document.createElement('th')
-  thName.innerHTML = name
-
-  let thTime = document.createElement('th')
-  thTime.innerHTML = time
-
-  let tr = document.querySelector('#scoreTable')
-  tr.appendChild(thName)
-  tr.appendChild(thTime)
+  let scoreDB = [name, time]
+  if (window.localStorage.getItem('player') === null) {
+    window.localStorage.setItem('player', JSON.stringify(scoreDB))
+  } else {  // om det redan finns spelare
+    let storedScore = window.localStorage.getItem('player')
+    storedScore = JSON.parse(storedScore)
+    if (name.length === 0) { name = storedScore[0] }
+    storedScore[0] = name
+    if (storedScore.length < 6) {
+      storedScore[0] = name
+      storedScore.push(time)
+      window.localStorage.setItem('player', JSON.stringify(storedScore))
+    }
+  }
+  Draw.getScore()
 }
 
 function _gameOver () {

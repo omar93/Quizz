@@ -13,6 +13,7 @@ startBtn.addEventListener('click', async (event) => {
 
 scoreBtn.addEventListener('click', () => {
   Draw.result()
+  Draw.getScore()
 })
 
 menuBtn.addEventListener('click', () => {
@@ -24,6 +25,7 @@ async function startGame (urlObject) {
   urlObject = await urlObject.json()
   Draw.game()
   Draw.q1(urlObject)
+  Timer.resetClock()
   Timer.StartTimer()
 }
 

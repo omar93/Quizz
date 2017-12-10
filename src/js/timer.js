@@ -5,20 +5,23 @@ let totalTime = 0
 function StartTimer () {
   // for each time we call it, it 'resets itself' and the values
   clearInterval(intervalId)
+
   let counter = 0
   let timeLeft = 20
   timer.textContent = '0:' + timeLeft
   intervalId = setInterval(() => {
     counter++
-    playerTime()
+    totalTime++
 
     timer.innerHTML = '0:' + (timeLeft - counter)
     if (counter === timeLeft) {
       timer.innerHTML = '0'
       clearInterval(intervalId)
+      totalTime = 0
       timeOut(intervalId)
+      counter = 0
     }
-  }, 1000)
+  }, 200)
 }
 
 function timeOut (id) {
@@ -28,18 +31,16 @@ function timeOut (id) {
   window.alert('Times up, you lost')
 }
 
-function playerTime () {
-  totalTime++
-}
-
 function stopTimer () {
   clearInterval(intervalId)
   return (totalTime)
+}
 
- // window.localStorage.setItem(JSON.stringify(name), JSON.stringify(score))
+function resetClock () {
+  totalTime = 0
 }
 module.exports = {
   StartTimer,
-  playerTime,
-  stopTimer
+  stopTimer,
+  resetClock
 }
