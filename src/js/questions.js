@@ -1,10 +1,6 @@
-// let playername = localStorage.getItem('player')
-
 let gameWindow = document.querySelector('#quizz')
 let welcomeWindow = document.querySelector('#welcome')
 let scoreWindow = document.querySelector('#scoreW')
-
-// let name = document.querySelector('#playername')
 
 let b1 = document.querySelector('#b1')
 let b2 = document.querySelector('#b2')
@@ -104,7 +100,6 @@ function _content (json) {
 }
 
 function _setContent (json, a1, a2, a3, a4) {
-  // console.log(json)
   question.textContent = json.question
   b1.textContent = a1
   b2.textContent = a2

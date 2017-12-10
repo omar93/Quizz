@@ -11,7 +11,6 @@ let name = ''
 
 let restartBtn = document.querySelector('#restart')
 
-// create 4 eventlisteners for all 4 buttons
 for (let i = 0; i < 4; i++) {
   answerBox.children[i].addEventListener('click', async (event) => {
     urlObject = await window.fetch(urlObject)
@@ -37,9 +36,8 @@ async function _sendAnswer (urlObject) {
   if (responseObject.message === 'Wrong answer! :(') { _gameOver() }
 }
 
-// get the next question url and set it
 async function _continue (serverResponse) {
-  urlObject = serverResponse.nextURL  // updates the question so when we click its the
+  urlObject = serverResponse.nextURL
   const responseObject = await window.fetch(urlObject)
   const objectUrl = await responseObject.json()
   _refreshWindow(objectUrl)
@@ -75,8 +73,8 @@ function setScore (time) {
     let timeDB = storedScore[1]
 
     if (name.length === 0) { name = storedScore[0] }
-
     storedScore[0] = name
+
     if (storedScore[1].length < 5) {
       storedScore[0] = name
       timeDB.push(time)
