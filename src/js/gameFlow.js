@@ -63,17 +63,23 @@ async function _winGame () {
 function setScore (time) {
   console.log(time)
   name = nameField.value
-  let scoreDB = [name, time]
+  let timeDB = []
+  timeDB.push(time)
+  // used if no data saved
+  let scoreDB = [name, timeDB]
   if (window.localStorage.getItem('player') === null) {
     window.localStorage.setItem('player', JSON.stringify(scoreDB))
+    // end if no data saved
   } else {  // om det redan finns spelare
     let storedScore = window.localStorage.getItem('player')
     storedScore = JSON.parse(storedScore)
+    let timeDB = storedScore[1]
+    console.log(timeDB[2])
     if (name.length === 0) { name = storedScore[0] }
     storedScore[0] = name
-    if (storedScore.length < 6) {
+    if (storedScore[1].length < 6) {
       storedScore[0] = name
-      storedScore.push(time)
+      timeDB.push(time)
       window.localStorage.setItem('player', JSON.stringify(storedScore))
     }
   }

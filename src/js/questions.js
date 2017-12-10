@@ -36,11 +36,11 @@ function getScore () {
   scoreObject = JSON.parse(scoreObject)
 
   document.querySelector('#playerName').textContent = scoreObject[0]
-  document.querySelector('#t1').textContent = scoreObject[1]
-  document.querySelector('#t2').textContent = scoreObject[2]
-  document.querySelector('#t3').textContent = scoreObject[3]
-  document.querySelector('#t4').textContent = scoreObject[4]
-  document.querySelector('#t5').textContent = scoreObject[5]
+  document.querySelector('#t1').textContent = scoreObject[1][1]
+  document.querySelector('#t2').textContent = scoreObject[1][2]
+  document.querySelector('#t3').textContent = scoreObject[1][3]
+  document.querySelector('#t4').textContent = scoreObject[1][4]
+  document.querySelector('#t5').textContent = scoreObject[1][5]
 }
 
 function q1 (json) {
