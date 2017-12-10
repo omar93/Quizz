@@ -64,9 +64,10 @@ function setScore (time) {
   name = nameField.value
   let timeDB = []
   timeDB.push(time)
-  let scoreDB = [name, timeDB]
 
-  if (window.localStorage.getItem('player') === null) {
+  if (window.localStorage.getItem('player') === null && name.length === 0) {
+    name = 'NoobNoName'
+    let scoreDB = [name, timeDB]
     window.localStorage.setItem('player', JSON.stringify(scoreDB))
   } else {
     let storedScore = window.localStorage.getItem('player')
