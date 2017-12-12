@@ -1,0 +1,106 @@
+body {
+    background-color:#ffcccc;
+}
+
+.hide {
+    display: none;
+}
+#welcome {
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 150px;
+    width: 650px;
+    padding: 5px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#scoreW {
+    margin: 0 auto;
+    text-align: center;
+    width: 500px;
+}
+#start, #restart, #menu, #score {
+    background-color: #A0A0A0;
+}
+.shape {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.shape:hover {
+    background-color: red;
+}
+#quizz {
+    background-color: #CCFFFF;
+    width: 650px;
+    height: 500px;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+#midLine {
+    margin-top: 15%;
+    width: 80%;
+}
+
+#question {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-top: 7%;
+    width: 80%;
+    border-radius: 0px;
+    background-color: white;
+}
+
+#timer {
+    width:75px;
+    margin-top: 10px;
+    margin-left: 44%;
+    border: 2px solid black;
+    font-size: 40px;
+    text-align: center
+
+}
+
+#ans {
+    height: 30%;
+    width: 100%;
+    margin-top: 10%;
+}
+
+.corners {
+    background-color: #ffd9cc;
+    width: 100px;
+    border: 3px solid #20D7D7;;
+    border-radius: 25px;
+}
+
+.text {
+    text-align: center;
+    font-size: 17px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.btn {
+    display: block;
+    float:left;
+    margin-left: 43px;
+    margin-top: 3%;
+    width: 40%;
+    padding: 10px;
+}
+
+.btn:hover {
+    background-color: red;
+}
+
+#scoreTable {
+    width: 100%;
+}
+
+ul li {
+    text-align: left;
+}
