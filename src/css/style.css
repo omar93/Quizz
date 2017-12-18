@@ -22,6 +22,7 @@ body {
     text-align: center;
     width: 500px;
 }
+
 #start, #restart, #menu, #score {
     background-color: #A0A0A0;
 }
@@ -70,6 +71,17 @@ body {
     height: 30%;
     width: 100%;
     margin-top: 10%;
+}
+
+#ansText {
+    text-align: center;
+    height: 30%;
+    width: 30%;
+    margin: 0 auto;
+}
+
+#answerBtn {
+    margin-left: 10px;
 }
 
 .corners {

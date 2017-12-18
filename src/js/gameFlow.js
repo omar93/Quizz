@@ -71,6 +71,7 @@ submitBtn.addEventListener('click', async (event) => {
   ans = answerField.value
   Timer.StartTimer()
   _sendAnswer(urlObject)
+  document.getElementById('answerField').value = ''
 })
 
 // server communication with fetch
