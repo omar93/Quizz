@@ -4,6 +4,7 @@ body {
 
 .hide {
     display: none;
+    margin-top: 5000px;
 }
 #welcome {
     background-color: white;

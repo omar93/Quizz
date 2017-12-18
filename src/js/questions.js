@@ -1,6 +1,8 @@
 let gameWindow = document.querySelector('#quizz')
 let welcomeWindow = document.querySelector('#welcome')
 let scoreWindow = document.querySelector('#scoreW')
+let textAns = document.querySelector('#ansText')
+let altAns = document.querySelector('#ans')
 
 let b1 = document.querySelector('#b1')
 let b2 = document.querySelector('#b2')
@@ -8,18 +10,31 @@ let b3 = document.querySelector('#b3')
 let b4 = document.querySelector('#b4')
 let question = document.querySelector('#question')
 
+// the home screen
 function welcome () {
   gameWindow.classList.add('hide')
   welcomeWindow.classList.remove('hide')
   scoreWindow.classList.add('hide')
 }
 
-function game () {
+// draws the game window
+function game (length) {
   gameWindow.classList.remove('hide')
   welcomeWindow.classList.add('hide')
   scoreWindow.classList.add('hide')
-}
 
+  // draws the text answer version
+  if (length === 4) {
+    textAns.classList.remove('hide')
+    altAns.classList.add('hide')
+  }
+  // draws the alternative version
+  if (length === 5) {
+    textAns.classList.add('hide')
+    altAns.classList.remove('hide')
+  }
+}
+// draw the score window
 function result () {
   gameWindow.classList.add('hide')
   welcomeWindow.classList.add('hide')
@@ -27,6 +42,7 @@ function result () {
   getScore()
 }
 
+// sets the score on the window
 function getScore () {
   let scoreObject = window.localStorage.getItem('player')
   scoreObject = JSON.parse(scoreObject)
@@ -40,56 +56,21 @@ function getScore () {
   document.querySelector('#t5').textContent = scoreObject[1][4]
 }
 
-function q1 (json) {
-  b1.textContent = '2'
-  b2.textContent = '42'
-  b3.textContent = '33'
-  b4.textContent = 'apa'
+// draw the textinput version
+function textQuestion (json) {
+  textAns.classList.remove('hide')
+  altAns.classList.add('hide')
   question.textContent = json.question
 }
 
-function q2 (json) {
+// draw the alternative version
+function altQuestion (json) {
+  textAns.classList.add('hide')
+  altAns.classList.remove('hide')
   _content(json)
 }
 
-function q3 (json) {
-  b1.textContent = '1995'
-  b2.textContent = '1996'
-  b3.textContent = '1990'
-  b4.textContent = '2003'
-  question.textContent = json.question
-}
-
-function q4 (json) {
-  _content(json)
-  b4.textContent = 'wtf'
-}
-
-function q5 (json) {
-  b1.textContent = 'V8'
-  b2.textContent = 'mp5'
-  b3.textContent = 'Rs6'
-  b4.textContent = 'Nodulus'
-  question.textContent = json.question
-}
-
-function q6 (json) {
-  _content(json)
-}
-
-function q7 (json) {
-  _content(json)
-}
-
-function autoQuestion (json) {
-  _content(json)
-}
-
-function semiAutoQuestion (json) {
-  _content(json)
-  b4.textContent = '%correct.answer%'
-}
-
+// sets the content of the questions/answers
 function _content (json) {
   let obj = json.alternatives
   let a1 = obj[Object.keys(obj)[0]]
@@ -99,26 +80,29 @@ function _content (json) {
   _setContent(json, a1, a2, a3, a4)
 }
 
+// draws the content
 function _setContent (json, a1, a2, a3, a4) {
+  let obj = json.alternatives
   question.textContent = json.question
+
   b1.textContent = a1
+  b1.classList.add((Object.keys(obj)[0]))
+
   b2.textContent = a2
+  b2.classList.add(Object.keys(obj)[1])
+
   b3.textContent = a3
+  b3.classList.add(Object.keys(obj)[2])
+
   b4.textContent = a4
+  b4.classList.add(Object.keys(obj)[3])
 }
 
 module.exports = {
-  q1,
-  q2,
-  q3,
-  q4,
-  q5,
-  q6,
-  q7,
   game,
   welcome,
   result,
-  autoQuestion,
-  semiAutoQuestion,
-  getScore
+  getScore,
+  textQuestion,
+  altQuestion
 }

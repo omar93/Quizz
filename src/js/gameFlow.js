@@ -1,26 +1,79 @@
 const Draw = require('./questions')
 const Timer = require('./timer')
 const Start = require('./start')
-let answerBox = document.querySelector('#ans')
 
 let ans = ''
 let urlObject = 'http://vhost3.lnu.se:20080/question/1'
-let batman = 'NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!'
+let startUrl = 'http://vhost3.lnu.se:20080/question/1'
 let nameField = document.querySelector('#name')
+let answerField = document.querySelector('#answerField')
 let name = ''
 
+let btn1 = document.querySelector('#b1')
+let btn2 = document.querySelector('#b2')
+let btn3 = document.querySelector('#b3')
+let btn4 = document.querySelector('#b4')
+
 let restartBtn = document.querySelector('#restart')
+let submitBtn = document.querySelector('#answerBtn')
 
-for (let i = 0; i < 4; i++) {
-  answerBox.children[i].addEventListener('click', async (event) => {
-    urlObject = await window.fetch(urlObject)
-    urlObject = await urlObject.json()
-    ans = (event.target.textContent)
-    Timer.StartTimer()
-    _filterAnswer(urlObject)
-  })
-}
+/**
+ * 4 event listeners
+ */
+btn1.addEventListener('click', async (event) => {
+  event.preventDefault()
+  urlObject = await window.fetch(urlObject)
+  urlObject = await urlObject.json()
+  Timer.StartTimer()
+  let obj = urlObject.alternatives
+  ans = Object.keys(obj)[0]
+  console.log(ans)
+  _sendAnswer(urlObject)
+})
 
+btn2.addEventListener('click', async (event) => {
+  event.preventDefault()
+  urlObject = await window.fetch(urlObject)
+  urlObject = await urlObject.json()
+  Timer.StartTimer()
+  let obj = urlObject.alternatives
+  ans = Object.keys(obj)[1]
+  console.log(ans)
+  _sendAnswer(urlObject)
+})
+
+btn3.addEventListener('click', async (event) => {
+  event.preventDefault()
+  urlObject = await window.fetch(urlObject)
+  urlObject = await urlObject.json()
+  Timer.StartTimer()
+  let obj = urlObject.alternatives
+  ans = Object.keys(obj)[2]
+  console.log(ans)
+  _sendAnswer(urlObject)
+})
+
+btn4.addEventListener('click', async (event) => {
+  event.preventDefault()
+  urlObject = await window.fetch(urlObject)
+  urlObject = await urlObject.json()
+  Timer.StartTimer()
+  let obj = urlObject.alternatives
+  ans = Object.keys(obj)[3]
+  _sendAnswer(urlObject)
+})
+
+// Submit button
+submitBtn.addEventListener('click', async (event) => {
+  event.preventDefault()
+  urlObject = await window.fetch(urlObject)
+  urlObject = await urlObject.json()
+  ans = answerField.value
+  Timer.StartTimer()
+  _sendAnswer(urlObject)
+})
+
+// server communication with fetch
 async function _sendAnswer (urlObject) {
   let submitAnswer = await window.fetch(urlObject.nextURL, {
     method: 'POST',
@@ -36,6 +89,7 @@ async function _sendAnswer (urlObject) {
   if (responseObject.message === 'Wrong answer! :(') { _gameOver() }
 }
 
+// gets repsonse from server and continues the game
 async function _continue (serverResponse) {
   urlObject = serverResponse.nextURL
   const responseObject = await window.fetch(urlObject)
@@ -43,14 +97,16 @@ async function _continue (serverResponse) {
   _refreshWindow(objectUrl)
 }
 
+// restarts the game
 restartBtn.addEventListener('click', async () => {
-  urlObject = 'http://vhost3.lnu.se:20080/question/1'
+  urlObject = startUrl
   Start.startGame(urlObject)
 })
 
+// ends game with prompt
 async function _winGame () {
-  urlObject = 'http://vhost3.lnu.se:20080/question/1'
-  name = nameField.valuelet
+  urlObject = startUrl
+  name = nameField.value
   Timer.stopTimer()
   let time = Timer.stopTimer()
   setScore(time)
@@ -58,13 +114,18 @@ async function _winGame () {
   window.alert('Good job, you won!')
 }
 
+// sets the highscore
 function setScore (time) {
   name = nameField.value
   let timeDB = []
   timeDB.push(time)
 
-  if (window.localStorage.getItem('player') === null && name.length === 0) {
-    name = 'NoobNoName'
+  if (window.localStorage.getItem('player') === null) {
+    if (name.length === 0) {
+      name = 'NoobNoName'
+    } else {
+      name = nameField.value
+    }
     let scoreDB = [name, timeDB]
     window.localStorage.setItem('player', JSON.stringify(scoreDB))
   } else {
@@ -96,29 +157,21 @@ function setScore (time) {
   Draw.getScore()
 }
 
+// restarts the game
 function _gameOver () {
   Timer.stopTimer()
-  urlObject = 'http://vhost3.lnu.se:20080/question/1'
+  urlObject = startUrl
   Draw.result()
   window.alert('Wrong answer, you lost')
 }
 
+// sets the questions and answers on the page
 function _refreshWindow (objectUrl) {
-  if (objectUrl.id === 1) { Draw.q1(objectUrl) }
-  if (objectUrl.id === 21) { Draw.autoQuestion(objectUrl) }
-  if (objectUrl.id === 321) { Draw.q3(objectUrl) }
-  if (objectUrl.id === 6) { Draw.semiAutoQuestion(objectUrl) }
-  if (objectUrl.id === 32) { Draw.q5(objectUrl) }
-  if (objectUrl.id === 32456) { Draw.semiAutoQuestion(objectUrl) }
-  if (objectUrl.id === 326) { Draw.autoQuestion(objectUrl) }
-}
-
-function _filterAnswer (urlObject) {
-  if (urlObject.id === 21 && ans === '10') { ans = 'alt3' }
-  if (urlObject.id === 6 && ans === 'You console it!') { ans = 'alt2' }
-  if (urlObject.id === 32456 && ans === batman) { ans = 'alt3' }
-  if (urlObject.id === 326 && ans === 'DOMherren') { ans = 'alt3' }
-  _sendAnswer(urlObject)
+  let objectLength = Object.keys(objectUrl).length
+  if (objectLength === 4) { Draw.textQuestion(objectUrl) }
+  if (objectLength === 5) {
+    Draw.altQuestion(objectUrl)
+  }
 }
 
 module.exports = {

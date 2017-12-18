@@ -5,6 +5,8 @@ let startBtn = document.querySelector('#start')
 let scoreBtn = document.querySelector('#score')
 let menuBtn = document.querySelector('#menu')
 
+let objectLength
+
 let urlObject = 'http://vhost3.lnu.se:20080/question/1'
 startBtn.addEventListener('click', async (event) => {
   event.preventDefault()
@@ -23,8 +25,11 @@ menuBtn.addEventListener('click', () => {
 async function startGame (urlObject) {
   urlObject = await window.fetch(urlObject)
   urlObject = await urlObject.json()
-  Draw.game()
-  Draw.q1(urlObject)
+  objectLength = Object.keys(urlObject).length
+  Draw.game(objectLength)
+  if (objectLength === 4) { Draw.textQuestion(urlObject) }
+  if (objectLength === 5) { Draw.altQuestion(urlObject) }
+
   Timer.resetClock()
   Timer.StartTimer()
 }

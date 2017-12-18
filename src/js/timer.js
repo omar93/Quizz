@@ -3,6 +3,7 @@ let timer = document.querySelector('#timer')
 let intervalId
 let totalTime = 0
 
+// starts the timer
 function StartTimer () {
   clearInterval(intervalId)
 
@@ -24,6 +25,7 @@ function StartTimer () {
   }, 1000)
 }
 
+// called when out of time
 function timeOut (id) {
   document.querySelector('#quizz').classList.add('hide')
   document.querySelector('#welcome').classList.add('hide')
@@ -32,11 +34,13 @@ function timeOut (id) {
   Draw.getScore()
 }
 
+// stops the timer
 function stopTimer () {
   clearInterval(intervalId)
   return (totalTime)
 }
 
+// resets the time
 function resetClock () {
   totalTime = 0
 }
